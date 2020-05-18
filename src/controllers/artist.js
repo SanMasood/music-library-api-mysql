@@ -9,4 +9,9 @@ exports.getter = (req,res) => {
   });
 };
 
-//exports.getbyId = (req,res) =
+exports.getById = (req,res) => {
+  const {id} = req.params;
+  Artist.findByPk(id).then( user => {
+    res.status(200).json(user);
+  });
+}
