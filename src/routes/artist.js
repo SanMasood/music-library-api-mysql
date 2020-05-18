@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/', artistController.create);
 router.get('/', artistController.getter);
 
-router.get('/:id', artistController.getById)
+router.get('/:id', artistController.getById);
 
 module.exports = router;

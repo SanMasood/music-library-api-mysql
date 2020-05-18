@@ -12,6 +12,10 @@ exports.getter = (req,res) => {
 exports.getById = (req,res) => {
   const {id} = req.params;
   Artist.findByPk(id).then( user => {
-    res.status(200).json(user);
+    if (!user)
+      res.status(404).json({error: 'The artist could not be found.'});
+    
+    else
+    res.status(200).json(user);    
   });
-}
+};
