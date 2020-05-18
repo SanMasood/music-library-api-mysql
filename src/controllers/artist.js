@@ -8,3 +8,5 @@ exports.getter = (req,res) => {
   Artist.findAll().then(user=> {res.status(200).json(user);
   });
 };
+
+//exports.getbyId = (req,res) =
