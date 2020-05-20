@@ -1,9 +1,10 @@
-/*module.exports = (sequelize, DataTypes) => {
+ 
+module.exports = (sequelize, DataTypes) => {
   const schema = {
     name: DataTypes.STRING,
-    genre: DataTypes.STRING,
+    year: DataTypes.INTEGER,
   };
 
-  const Artist = sequelize.define('Artist', schema);
-  return Artist;
-};*/
+  const Album = sequelize.define('Album', schema);
+  return Album;
+};
