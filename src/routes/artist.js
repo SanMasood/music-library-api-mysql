@@ -9,4 +9,7 @@ router.get('/', artistController.getter);
 
 router.get('/:id', artistController.getById);
 
+router.patch('/:id', artistController.updateArtistById);
+
+
 module.exports = router;
