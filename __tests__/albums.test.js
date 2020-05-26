@@ -74,9 +74,9 @@ describe('/albums', () => {
     let albums;
     beforeEach((done) => {
       Promise.all([
-        Artist.create({ name: 'Tame Impala', year: 1980, artistId: artist.id }),
-        Artist.create({ name: 'Kylie Minogue', year: 1999, artistId: artist.id  }),
-        Artist.create({ name: 'Dave Brubeck', year: 1990, artistId: artist.id  }),
+        Album.create({ name: 'Tame Impala', year: 1980, artistId: artist.id }),
+        Album.create({ name: 'Kylie Minogue', year: 1999, artistId: artist.id  }),
+        Album.create({ name: 'Dave Brubeck', year: 1990, artistId: artist.id  }),
       ]).then((documents) => {
         albums = documents;
         done();
