@@ -48,6 +48,7 @@ describe('/albums', () => {
           });
         });
     });
+  });
 
     it('returns a 404 and does not create an album if the artist does not exist', (done) => {
       request(app)
@@ -66,5 +67,48 @@ describe('/albums', () => {
           });
         });
     });
-  });
-});
+ 
+
+  
+  describe('with albums in the database', () => {
+    let albums;
+    beforeEach((done) => {
+      Promise.all([
+        Artist.create({ name: 'Tame Impala', year: 1980, artistId: artist.id }),
+        Artist.create({ name: 'Kylie Minogue', year: 1999, artistId: artist.id  }),
+        Artist.create({ name: 'Dave Brubeck', year: 1990, artistId: artist.id  }),
+      ]).then((documents) => {
+        albums = documents;
+        done();
+      });
+    });
+    describe('GET artists/:artistId/albums', () => {
+      xit('gets albums by artist', (done) => {
+        request(app)
+          .get(`/artists/${artist.id}/albums`)
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.length).to.equal(3);
+            //console.log(res.body);
+            res.body.forEach((album) => { 
+              const expected = albums.find((a) => a.id === album.id);
+              expect(album.name).to.equal(expected.name);
+              expect(album.year).to.equal(expected.year);
+              expect(album.artistId).to.equal(artist.id);
+            });
+            done();
+          });
+      });
+
+      xit('returns a 404 if the artist does not exist', (done) => {
+        request(app)
+          .get(`/artists/lulu/albums`)
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal('The artist could not be found.');
+            done();
+          });
+      });
+    });
+})
+})
