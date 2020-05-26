@@ -110,5 +110,32 @@ describe('/albums', () => {
           });
       });
     });
+
+    describe('PATCH album/:albumId', () => {
+      it('updates album name by album id', (done) => {
+        const album = albums[0];
+        request(app)
+          .patch(`/album/${album.id}`)
+          .send({ name: 'Psychedelic Rock' })
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            Album.findByPk(album.id, { raw: true }).then((updatedAlbum) => {
+              expect(updatedAlbum.name).to.equal('Psychedelic Rock');
+              done();
+            });
+          });
+      });
+
+      /*it('returns a 404 if the album does not exist', (done) => {
+        request(app)
+          .patch('/album/12345')
+          .send({ name: 'Psychedelic Rock' })
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal('The album could not be found.');
+            done();
+          });
+      });*/
+    });
   })
 })
